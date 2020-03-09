@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Data</title>
+  </head>
+  <body>
+    <h1>Input Data</h1>
+    <form action="/" method="POST">
+      <div>
+        <label for="nip">NIP:</label>
+        <input type="text" name="nip" id="nip" value="{{ data['nip'] if data }}" required />
+      </div>
+      <div>
+        <label for="golongan">GOLONGAN:</label>
+        <input type="number" name="golongan" id="golongan" value="{{ data['golongan'] if data }}" />
+      </div>
+      <div>
+        <label for="nama">NAMA:</label>
+        <input type="text" name="nama" id="nama" value="{{ data['nama'] if data }}" />
+      </div>
+      <div>
+        <label for="kode_bagian">KODE BAGIAN:</label>
+        <input type="text" name="kode_bagian" id="kode_bagian" value="{{ data['kode_bagian'] if data }}" />
+      </div>
+      <div>
+        <button>Tambah Karyawan</button>
+      </div>
+    </form>
+  </body>
+</html>

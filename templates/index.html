@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Data Karyawan</h1>
+    <div>
+      <button onclick="window.location.href = '/tambah-data-karyawan' ">
+        Tambah Data Karyawan
+      </button>
+      <button onclick="window.location.href = '/inputForm.html' ">
+        Tambah Data Bagian
+      </button>
+    </div>
+    <br />
+
+    <div>
+      <form action="/" method="post">
+        {% if not keyword %}
+        <input type="text" name="keyword" id="keyword" placeholder="cari nip" required  />
+        {% else %}
+        <input type="text" name="keyword" id="keyword" placeholder="cari nip"  />
+        {% endif %}
+        <button type="submit" formmethod="post">Cari NIP</button>
+        {% if keyword%}
+        <button type="submit" formmethod="get">Reset Search</button>
+        {% endif %}
+      </form>
+    </div>
+    <br/>
+
+    <form action="/" method="post">
+      <fieldset>
+        <legend>Urutkan Berdasarkan:</legend>
+        {% for data in columns %}
+        <input type="checkbox" name="sort_by" value={{ columns_sort[loop.index - 1] }}>
+        <label for={{ data }}>{{ data }}</label>
+        {% endfor %}
+        <button type="submit" formmethod="post">Urutkan Data</button>
+      </fieldset>
+    </form>
+    <br/>
+    
+    <table border="1">
+      <thead>
+        <tr>
+          {% for data in columns %}
+            <th>{{ data }}</th>
+          {% endfor %}
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="dataMaster">
+      {% if data %}
+        {% for row in data %}
+        <tr>
+          <td>{{ row['nip'] }}</td>
+          <td>{{ row['golongan'] }}</td>
+          <td>{{ row['nama'] }}</td>
+          <td>{{ row['kode_bagian'] }}</td>
+          <td>
+            <a href="/edit/{{ row['nip'] }}">Edit</a>
+            <a href="/hapus/{{ row['nip'] }}">Hapus</a>
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="5">Data karyawan kosong</td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </body>
+</html>

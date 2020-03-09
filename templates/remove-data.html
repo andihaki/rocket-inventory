@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hapus Data Karyawan</title>
+  </head>
+  <body>
+    <h1>Hapus Data Karyawan</h1>
+    {% if data %}
+    <div>
+      Data NIP {{ data['nip'] }} dengan nama karyawan {{ data['nama'] }}
+      berhasil di hapus!
+    </div>
+    {% endif %}
+    <a href="/">Kembali ke Home</a>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+[
+  {
+    "nip": "P03",
+    "golongan": "2",
+    "nama": "ADI KARYA",
+    "kode_bagian": "B01"
+  },
+  {
+    "nip": "P01",
+    "golongan": 2,
+    "nama": "JOKO",
+    "kode_bagian": "B03"
+  },
+  {
+    "nip": "P02",
+    "golongan": 1,
+    "nama": "RUDI",
+    "kode_bagian": "B02"
+  },
+  {
+    "nip": "P04",
+    "golongan": 1,
+    "nama": "TUTI",
+    "kode_bagian": "B09"
+  }
+]
