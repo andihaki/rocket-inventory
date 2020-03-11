@@ -130,3 +130,5 @@ dmypy.json
 
 # python
 .vscode
+.DS_Store
+.pyc

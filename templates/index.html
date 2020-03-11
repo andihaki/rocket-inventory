@@ -23,7 +23,7 @@
         {% if not keyword %}
         <input type="text" name="keyword" id="keyword" placeholder="cari nip" required  />
         {% else %}
-        <input type="text" name="keyword" id="keyword" placeholder="cari nip"  />
+        <input type="text" name="keyword" id="keyword" placeholder="cari nip" value={{ keyword }}  />
         {% endif %}
         <button type="submit" formmethod="post">Cari NIP</button>
         {% if keyword%}

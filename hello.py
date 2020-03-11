@@ -2,10 +2,12 @@ from flask import Flask, url_for, request, render_template, jsonify
 from markupsafe import escape
 app = Flask(__name__)
 
+file_path = "data.json"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     import json
+    import os
 
     # instansi variabel
     data_karyawan = []
@@ -15,8 +17,13 @@ def index():
     columns_sort = ['nip', 'golongan', 'nama', 'kode_bagian']
 
     # baca data.json, simpan di variabel data_karyawan
-    with open("data.json", "r") as file:
-        data_karyawan = json.load(file)
+    # jika file tidak ada, maka buat file tersebut
+    if os.path.exists(file_path):
+        with open(file_path, "r") as file:
+            data_karyawan = json.load(file)
+    else:
+        with open(file_path, "w") as file:
+            json.dump([], file, indent=2)
 
     # jika data dikiriim dengan method POST
     # maka update data karyawan di data.json
@@ -28,12 +35,12 @@ def index():
         keyword = request.form.get('keyword', '')
         sort_by = request.form.getlist('sort_by')
 
-        print(nip)
         # jika ada keyword,
         if keyword:
             for data in data_karyawan:
                 if data['nip'] == keyword:
                     data_karyawan = [data]
+
                     break
                 else:
                     data_karyawan = []
@@ -72,12 +79,14 @@ def index():
                     if row['nip'] == nip:
                         # ganti data di index sesuai nip dengan data yang baru
                         data_karyawan[index] = new_data
+            data_karyawan = new_data_karyawan
             # tulis ke file
-            with open("data.json", "w") as file:
+            with open(file_path, "w") as file:
                 # jika ada data baru, maka tulis new_data_karyawan
                 json.dump(
                     new_data_karyawan if new_data_karyawan else data_karyawan, file, indent=2)
-
+    
+    print(keyword)
     # tampilkan data_karyawan dengan template index.html
     return render_template('index.html', data=data_karyawan, keyword=keyword, columns=columns, columns_sort=columns_sort)
 
@@ -92,7 +101,7 @@ def editData(id):
     data_karyawan = []
 
     # baca data.json, simpan di variabel data_karyawan
-    with open("data.json", "r") as file:
+    with open(file_path, "r") as file:
         import json
         data_karyawan = json.load(file)
 
@@ -111,7 +120,7 @@ def removeData(id):
     deleted_index = 0
 
     # baca data.json, simpan di variabel data_karyawan
-    with open("data.json", "r") as file:
+    with open(file_path, "r") as file:
         import json
         data_karyawan = json.load(file)
 
@@ -132,7 +141,7 @@ def removeData(id):
             data_karyawan[deleted_index+1:len(data_karyawan)]
 
         # tulis data setelah di hapus ke file
-        with open("data.json", "w") as file:
+        with open(file_path, "w") as file:
             json.dump(new_data_karyawan, file, indent=2)
 
     return render_template('remove-data.html', data=deleted_data)
