@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Data</title>
+  </head>
+  <body>
+    <h1>Input Data</h1>
+    <form action="/" method="POST">
+      <div>
+        <label for="kode_bagian">KODE BAGIAN:</label>
+        <input type="text" name="kode_bagian" id="kode_bagian" value="{{ data['kode_bagian'] if data }}" required />
+      </div>
+      <div>
+        <label for="nama_bagian">NAMA BAGIAN:</label>
+        <input type="text" name="nama_bagian" id="nama_bagian" value="{{ data['nama_bagian'] if data }}" />
+      </div>
+      <div>
+        <button>Tambah Data Bagian</button>
+      </div>
+    </form>
+  </body>
+</html>

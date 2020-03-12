@@ -3,6 +3,7 @@ from markupsafe import escape
 app = Flask(__name__)
 
 file_path = "data.json"
+file_2_path = "data_bagian.json"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -12,6 +13,8 @@ def index():
     # instansi variabel
     data_karyawan = []
     new_data_karyawan = []
+    data_bagian = []
+    new_data_bagian = []
     keyword = ""
     columns = ['NIP', 'Golongan', 'Nama', 'Nama Bagian']
     columns_sort = ['nip', 'golongan', 'nama', 'kode_bagian']
@@ -24,6 +27,14 @@ def index():
     else:
         with open(file_path, "w") as file:
             json.dump([], file, indent=2)
+    # baca data.json, simpan di variabel data_karyawan
+    # jika file tidak ada, maka buat file tersebut
+    if os.path.exists(file_2_path):
+        with open(file_2_path, "r") as file:
+            data_bagian = json.load(file)
+    else:
+        with open(file_2_path, "w") as file:
+            json.dump([], file, indent=2)
 
     # jika data dikiriim dengan method POST
     # maka update data karyawan di data.json
@@ -34,6 +45,9 @@ def index():
         kode_bagian = request.form.get('kode_bagian', '')
         keyword = request.form.get('keyword', '')
         sort_by = request.form.getlist('sort_by')
+
+        # untuk tambah data bagian
+        nama_bagian = request.form.get('nama_bagian', '')
 
         # jika ada keyword,
         if keyword:
@@ -85,8 +99,22 @@ def index():
                 # jika ada data baru, maka tulis new_data_karyawan
                 json.dump(
                     new_data_karyawan if new_data_karyawan else data_karyawan, file, indent=2)
+        
+        elif kode_bagian:
+            new_data = {
+                "kode_bagian": kode_bagian,
+                "nama_bagian": nama_bagian
+            }
+            is_data_exist = any(d['kode_bagian'] == kode_bagian for d in data_bagian)
+            if new_data and not is_data_exist:
+                new_data_bagian = data_bagian + [new_data]
+            data_bagian = new_data_bagian
+
+            # tulis ke file
+            with open(file_2_path, "w") as file:
+                json.dump(new_data_bagian if new_data_bagian else data_bagian, file, indent=2)
+
     
-    print(keyword)
     # tampilkan data_karyawan dengan template index.html
     return render_template('index.html', data=data_karyawan, keyword=keyword, columns=columns, columns_sort=columns_sort)
 
@@ -145,3 +173,7 @@ def removeData(id):
             json.dump(new_data_karyawan, file, indent=2)
 
     return render_template('remove-data.html', data=deleted_data)
+
+@app.route('/tambah-data-bagian')
+def addData2():
+    return render_template('add-data-form-2.html')
