@@ -22,5 +22,17 @@
     "golongan": 1,
     "nama": "TUTI",
     "kode_bagian": "B09"
+  },
+  {
+    "nip": "P22",
+    "golongan": "1",
+    "nama": "TOTO",
+    "kode_bagian": "B03"
+  },
+  {
+    "nip": "P29",
+    "golongan": "9",
+    "nama": "TEST",
+    "kode_bagian": "B03"
   }
 ]

@@ -1,9 +1,23 @@
-from flask import Flask, url_for, request, render_template, jsonify
+from flask import Flask, url_for, request, render_template, jsonify, redirect
 from markupsafe import escape
 app = Flask(__name__)
 
 file_path = "data.json"
 file_2_path = "data_bagian.json"
+
+def find_relation(word, array):
+    founded = False
+    founded_word = ""
+
+    for index, row in enumerate(array):
+        if row['kode_bagian'] == word:
+            founded_word = row['nama_bagian']
+            founded = True
+    
+    if founded:
+        return founded_word
+    else:
+        return "data tidak ditemukan"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -17,7 +31,10 @@ def index():
     new_data_bagian = []
     keyword = ""
     columns = ['NIP', 'Golongan', 'Nama', 'Nama Bagian']
-    columns_sort = ['nip', 'golongan', 'nama', 'kode_bagian']
+    columns_sort = ['nip', 'golongan', 'nama', 'nama_bagian']
+
+    # data join dua tabel
+    data_join = []
 
     # baca data.json, simpan di variabel data_karyawan
     # jika file tidak ada, maka buat file tersebut
@@ -27,6 +44,24 @@ def index():
     else:
         with open(file_path, "w") as file:
             json.dump([], file, indent=2)
+
+    # baca data.json, simpan di variabel data_karyawan
+    # jika file tidak ada, maka buat file tersebut
+    if os.path.exists(file_2_path):
+        with open(file_2_path, "r") as file:
+            data_bagian = json.load(file)
+    else:
+        with open(file_2_path, "w") as file:
+            json.dump([], file, indent=2)
+    
+    # copy without reference
+    from copy import deepcopy
+    data_join = deepcopy(data_karyawan)  
+
+    # looping semua data karyawan
+    for index, row in enumerate(data_join):
+        data_join[index]['nama_bagian'] = find_relation(row['kode_bagian'], data_bagian)
+
     # baca data.json, simpan di variabel data_karyawan
     # jika file tidak ada, maka buat file tersebut
     if os.path.exists(file_2_path):
@@ -59,16 +94,16 @@ def index():
                 else:
                     data_karyawan = []
         elif sort_by:
-            data_length = len(data_karyawan) - 1
+            data_length = len(data_join) - 1
             # sorting data
             while (data_length > 0):
                 index = 0
                 while (index < data_length):
                     for by in sort_by:
-                        if str(data_karyawan[index][by]) > str(data_karyawan[index + 1][by]):
-                            temp = data_karyawan[index]
-                            data_karyawan[index] = data_karyawan[index + 1]
-                            data_karyawan[index+1] = temp
+                        if str(data_join[index][by]).casefold() > str(data_join[index + 1][by]).casefold():
+                            temp = data_join[index]
+                            data_join[index] = data_join[index + 1]
+                            data_join[index+1] = temp
                     index += 1
                 data_length -= 1
 
@@ -93,7 +128,8 @@ def index():
                     if row['nip'] == nip:
                         # ganti data di index sesuai nip dengan data yang baru
                         data_karyawan[index] = new_data
-            data_karyawan = new_data_karyawan
+            # data_karyawan = new_data_karyawan
+            
             # tulis ke file
             with open(file_path, "w") as file:
                 # jika ada data baru, maka tulis new_data_karyawan
@@ -113,10 +149,13 @@ def index():
             # tulis ke file
             with open(file_2_path, "w") as file:
                 json.dump(new_data_bagian if new_data_bagian else data_bagian, file, indent=2)
+        
+        # refresh page
+        redirect(url_for('index'))
 
     
     # tampilkan data_karyawan dengan template index.html
-    return render_template('index.html', data=data_karyawan, keyword=keyword, columns=columns, columns_sort=columns_sort)
+    return render_template('index.html', data=data_join, keyword=keyword, columns=columns, columns_sort=columns_sort)
 
 
 @app.route('/tambah-data-karyawan')

@@ -1,8 +1,6 @@
 # run without venv
 
-$ export FLASK_APP=hello.py
-$ export FLASK_ENV=development
-\$ flask run
+\$ export FLASK_APP=hello.py && export FLASK_ENV=development && flask run
 
 # todos
 
