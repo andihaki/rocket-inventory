@@ -3,74 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tugas</title>
-    <style></style>
+    <title>Jual Beli Mobil Listrik</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.css') }}">
   </head>
-  <body>
-    <h1>Data Karyawan</h1>
+  <body class="container">
+    <h1>Data Penjualan Mobil Listrik</h1>
     <div>
-      <button onclick="window.location.href = '/tambah-data-karyawan' ">
-        Tambah Data Karyawan
+      <button onclick="window.location.href = '/tambah-data' " >
+        Tambah Data Pelanggan
       </button>
-      <button onclick="window.location.href = '/tambah-data-bagian' ">
-        Tambah Data Bagian
+      <button onclick="window.location.href = '/tambah-data-relasi' ">
+        Tambah Stok Mobil
       </button>
     </div>
     <br />
 
-    <div>
-      <form action="/" method="post">
+    <div >
+      <form action="/" method="post" class="row" >
         {% if not keyword %}
-        <input type="text" name="keyword" id="keyword" placeholder="cari nip" required  />
+        <input type="text" name="keyword" id="keyword" placeholder="cari data" required  />
         {% else %}
-        <input type="text" name="keyword" id="keyword" placeholder="cari nip" value={{ keyword }}  />
+        <input type="text" name="keyword" id="keyword" placeholder="cari data" value={{ keyword }}  />
         {% endif %}
-        <button type="submit" formmethod="post">Cari NIP</button>
+        <button type="submit" formmethod="post" class="button button-outline">Cari</button>
         {% if keyword%}
-        <button type="submit" formmethod="get">Reset Search</button>
+        <button type="submit" formmethod="get" class="button button-outline">Reset</button>
         {% endif %}
+        
       </form>
     </div>
-    <br/>
 
     <form action="/" method="post">
-      <fieldset>
+      <fieldset >
         <legend>Urutkan Berdasarkan:</legend>
         {% for data in columns %}
         <input type="checkbox" name="sort_by" value={{ columns_sort[loop.index - 1] }}>
-        <label for={{ data }}>{{ data }}</label>
+        <label for={{ data }} class="label-inline">{{ data }}</label>
         {% endfor %}
-        <button type="submit" formmethod="post">Urutkan Data</button>
+        <button type="submit" formmethod="post" class="button button-outline">Urutkan Data</button>
       </fieldset>
     </form>
     <br/>
     
-    <table border="1">
+    <table>
       <thead>
         <tr>
           {% for data in columns %}
             <th>{{ data }}</th>
           {% endfor %}
-          <th>Action</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody id="dataMaster">
       {% if data %}
         {% for row in data %}
         <tr>
-          <td>{{ row['nip'] }}</td>
-          <td>{{ row['golongan'] }}</td>
+          <td>{{ row['id'] }}</td>
           <td>{{ row['nama'] }}</td>
-          <td>{{ row['nama_bagian'] }}</td>
+          <td>{{ row['telepon'] }}</td>
+          <td>{{ row['tipe'] }}</td>
           <td>
-            <a href="/edit/{{ row['nip'] }}">Edit</a>
-            <a href="/hapus/{{ row['nip'] }}">Hapus</a>
+            <a href="/edit/{{ row['id'] }}">Edit</a> | 
+            <a href="/hapus/{{ row['id'] }}">Hapus</a>
           </td>
         </tr>
         {% endfor %}
       {% else %}
         <tr>
-          <td colspan="5">Data karyawan kosong</td>
+          <td colspan="5">Sepi Pelanggan</td>
         </tr>
       {% endif %}
       </tbody>

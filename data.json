@@ -1,38 +1,26 @@
 [
   {
-    "nip": "P03",
-    "golongan": "2",
-    "nama": "ADI KARYA",
-    "kode_bagian": "B01"
+    "id": "1",
+    "telepon": "11111",
+    "nama": "sukarno",
+    "kode_relation": "m1"
   },
   {
-    "nip": "P01",
-    "golongan": 2,
-    "nama": "JOKO",
-    "kode_bagian": "B03"
+    "id": "2",
+    "telepon": "22222",
+    "nama": "sutarjo",
+    "kode_relation": "y1"
   },
   {
-    "nip": "P02",
-    "golongan": 1,
-    "nama": "RUDI",
-    "kode_bagian": "B02"
-  },
-  {
-    "nip": "P04",
-    "golongan": 1,
-    "nama": "TUTI",
-    "kode_bagian": "B09"
-  },
-  {
-    "nip": "P22",
-    "golongan": "1",
+    "id": "3",
+    "telepon": "3333",
     "nama": "TOTO",
-    "kode_bagian": "B03"
+    "kode_relation": "t1"
   },
   {
-    "nip": "P29",
-    "golongan": "9",
-    "nama": "TEST",
-    "kode_bagian": "B03"
+    "id": "7",
+    "telepon": "123",
+    "nama": "rsfm",
+    "kode_relation": "as"
   }
 ]

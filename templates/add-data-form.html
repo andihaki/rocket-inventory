@@ -4,29 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Input Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.css') }}">
   </head>
-  <body>
-    <h1>Input Data</h1>
-    <form action="/" method="POST">
+  <body class="container">
+    <h1>Tambah Data Pelanggan Baru</h1>
+    {% if not add_done %}
+    <form action="/tambah-data" method="POST">
       <div>
-        <label for="nip">NIP:</label>
-        <input type="text" name="nip" id="nip" value="{{ data['nip'] if data }}" required />
+        <label for="id">ID Pelanggan:</label>
+        <input type="text" name="id" id="id" value="{{ data['id'] if data }}" required />
       </div>
       <div>
-        <label for="golongan">GOLONGAN:</label>
-        <input type="number" name="golongan" id="golongan" value="{{ data['golongan'] if data }}" />
-      </div>
-      <div>
-        <label for="nama">NAMA:</label>
+        <label for="nama">Nama:</label>
         <input type="text" name="nama" id="nama" value="{{ data['nama'] if data }}" />
       </div>
+
       <div>
-        <label for="kode_bagian">KODE BAGIAN:</label>
-        <input type="text" name="kode_bagian" id="kode_bagian" value="{{ data['kode_bagian'] if data }}" />
+        <label for="telepon">Telepon:</label>
+        <input type="number" name="telepon" id="telepon" value="{{ data['telepon'] if data }}" />
       </div>
       <div>
-        <button>Tambah Karyawan</button>
+        <label for="kode_relation">Kode Stok Barang:</label>
+        <input type="text" name="kode_relation" id="kode_relation" value="{{ data['kode_relation'] if data }}" />
+      </div>
+      <div>
+        <button>{{ 'Edit' if data else 'Tambah' }}</button>
       </div>
     </form>
+    {% else %}
+      <div>
+        Data Pelanggan {{ data['nama'] }} telah ditambahkan!
+      </div>
+    {% endif %}
+    <a href="/">Kembali ke Home</a>
   </body>
 </html>

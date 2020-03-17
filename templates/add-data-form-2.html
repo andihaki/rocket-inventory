@@ -4,21 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Input Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.css') }}">
   </head>
-  <body>
+  <body class="container">
     <h1>Input Data</h1>
-    <form action="/" method="POST">
+    {% if not add_done %}
+    <form action="/tambah-data-relasi" method="POST">
       <div>
-        <label for="kode_bagian">KODE BAGIAN:</label>
-        <input type="text" name="kode_bagian" id="kode_bagian" value="{{ data['kode_bagian'] if data }}" required />
+        <label for="id_relation">Kode Stok:</label>
+        <input type="text" name="id_relation" id="id_relation" value="{{ data['id_relation'] if data }}" required />
       </div>
       <div>
-        <label for="nama_bagian">NAMA BAGIAN:</label>
-        <input type="text" name="nama_bagian" id="nama_bagian" value="{{ data['nama_bagian'] if data }}" />
+        <label for="tipe">Tipe / Nama Mobil:</label>
+        <input type="text" name="tipe" id="tipe" value="{{ data['tipe'] if data }}" />
       </div>
       <div>
-        <button>Tambah Data Bagian</button>
+        <button>Tambah</button>
       </div>
     </form>
+    {% else %}
+      <div>
+        Data telah ditambahkan!
+      </div>
+    {% endif %}
+    <a href="/">Kembali ke Home</a>
   </body>
 </html>

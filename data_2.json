@@ -1,0 +1,18 @@
+[
+  {
+    "id_relation": "m1",
+    "tipe": "Tesla"
+  },
+  {
+    "id_relation": "y1",
+    "tipe": "Toyota Prius"
+  },
+  {
+    "id_relation": "t1",
+    "tipe": "toktok"
+  },
+  {
+    "id_relation": "mm1",
+    "tipe": "abc"
+  }
+]
