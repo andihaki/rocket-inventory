@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.css') }}">
   </head>
   <body class="container">
-    <h1>Tambah Data Pelanggan Baru</h1>
     {% if not add_done %}
+    <h1>{{ 'Edit Data Pelanggan' if data else 'Tambah Data Pelanggan Baru' }}</h1>
     <form action="/tambah-data" method="POST">
       <div>
         <label for="id">ID Pelanggan:</label>

@@ -1,11 +1,38 @@
-# run without venv
+# programming language
+
+Python 3
+https://www.python.org/downloads/
+
+# requirements
+
+Flask (web framework)
+https://flask.palletsprojects.com/en/1.1.x/installation/
+`pip install Flask`
+
+# run program
 
 \$ export FLASK_APP=hello.py && export FLASK_ENV=development && flask run
 
-# todos
+open in web browser http://127.0.0.1:5000
 
-[x] add data bagian
-[] reset sort method
-[] add relation karyawan x bagian in home page
-[] add relatation karyawan x bagian in add data page (drop down list)
-[] change data karyawan x bagian to another consept
+# Demo program
+
+## Homepage
+
+![Homepage](demo/homepage.png)
+
+## Searching
+
+![search](demo/searcing.png)
+
+## Sort data
+
+![sort](demo/sorting.png)
+
+## Edit Customer Data
+
+![edit](demo/edit.png)
+
+## Add Car Data
+
+![aff](demo/add-stok.png)

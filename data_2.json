@@ -1,7 +1,7 @@
 [
   {
     "id_relation": "m1",
-    "tipe": "Tesla"
+    "tipe": "Tesla Model X"
   },
   {
     "id_relation": "y1",
@@ -9,7 +9,7 @@
   },
   {
     "id_relation": "t1",
-    "tipe": "toktok"
+    "tipe": "Audi E-Tron"
   },
   {
     "id_relation": "mm1",

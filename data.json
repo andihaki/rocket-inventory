@@ -1,26 +1,26 @@
 [
   {
     "id": "1",
-    "telepon": "11111",
-    "nama": "sukarno",
+    "telepon": "02123412312312",
+    "nama": "James",
     "kode_relation": "m1"
   },
   {
     "id": "2",
-    "telepon": "22222",
-    "nama": "sutarjo",
+    "telepon": "08194378876",
+    "nama": "Bond",
     "kode_relation": "y1"
   },
   {
     "id": "3",
-    "telepon": "3333",
-    "nama": "TOTO",
+    "telepon": "081187899777",
+    "nama": "Joko",
     "kode_relation": "t1"
   },
   {
     "id": "7",
-    "telepon": "123",
-    "nama": "rsfm",
+    "telepon": "089988678999",
+    "nama": "Usop",
     "kode_relation": "as"
   }
 ]
