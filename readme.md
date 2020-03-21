@@ -23,7 +23,7 @@ open in web browser http://127.0.0.1:5000
 
 ## Searching
 
-![search](demo/searcing.png)
+![search](demo/searching.png)
 
 ## Sort data
 
